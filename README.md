@@ -1,2 +1,2 @@
-# wp-condominium-manager
+# wpcm
 WP Condominium Manager
