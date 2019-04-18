@@ -4,7 +4,9 @@
  * @package wpcm
  */
 
-class WPCMActivate {
+namespace WPCMPlugin\Base;
+
+class Activate {
     public static function activate() {
         // Flush rewrite rules
         flush_rewrite_rules();

@@ -34,57 +34,57 @@
  * SOFTWARE.
  */
 
-defined('ABSPATH') or die("Hey, you can't access this file, you silly human!");
+// Abort if this file is called directly.
+defined('ABSPATH') or die("Hey, what are you doing here? You silly human!");
 
-class WPCMPlugin {
-    public function __construct() {
-        add_action('init', array($this, 'custom_post_type'));
-    }
-
-    public function register() {
-        // Admin scripts and stylesheets
-        add_action('admin_enqueue_scripts', array($this, 'enqueue'));
-
-        // Admin menu
-        add_action('admin_menu', array($this, 'add_admin_pages'));
-    }
-
-    public function add_admin_pages() {
-        add_menu_page('WPCM Plugin', 'WPCMP', 'manage_options', 'wpcm_plugin', array($this, 'admin_index'), 'dashicons-building', 110);
-    }
-
-    public function admin_index() {
-        require_once(plugin_dir_path(__FILE__) . 'templates/admin.php');
-    }
-
-    protected function create_post_type() {
-        add_action('init', array($this, 'custom_post_type'));
-    }
-
-    public function custom_post_type() {
-        register_post_type('books', array('public' => true, 'label' => 'Books'));
-    }
-
-    public function enqueue() {
-        // Enqueue all our scripts
-        wp_enqueue_style('mypluginstyle', plugins_url('/assets/styles.css', __FILE__));
-        wp_enqueue_script('mypluginstyle', plugins_url('/assets/scripts.js', __FILE__));
-    }
-
-    public function activate() {
-        require_once(plugin_dir_path(__FILE__) . 'includes/WPCMActivate.php');
-        WPCMActivate::activate();
-    }
+if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
+    require_once(dirname(__FILE__) . '/vendor/autoload.php');
 }
 
-if (class_exists('WPCMPlugin')) {
+define('PLUGIN_PATH', plugin_dir_path(__FILE__));
+define('PLUGIN_URL', plugin_dir_url(__FILE__));
+define('PLUGIN', plugin_basename(__FILE__));
+
+// Activation
+function activate_wpcm_plugin() {
+    WPCMPlugin\Base\Activate::activate();
+}
+register_activation_hook(__FILE__, 'activate_wpcm_plugin');
+
+// Deactivation
+function deactivate_wpcm_plugin() {
+    WPCMPlugin\Base\Deactivate::deactivate();
+}
+register_deactivation_hook(__FILE__, 'deactivate_wpcm_plugin');
+
+if (class_exists('WPCMPlugin\\Init')) {
+    WPCMPlugin\Init::register_services();
+}
+
+/*
+use WPCMPlugin\Activate;
+use WPCMPlugin\Deactivate;
+use WPCMPlugin\Pages\Admin;
+
+if (!class_exists('WPCMPlugin')) {
+    class WPCMPlugin {
+
+
+        protected function create_post_type() {
+            add_action('init', array($this, 'custom_post_type'));
+        }
+
+        public function custom_post_type() {
+            register_post_type('books', array('public' => true, 'label' => 'Books'));
+        }
+
+        public function activate() {
+            Activate::activate();
+        }
+    }
+
     $bootstrap = new WPCMPlugin();
     $bootstrap->register();
 }
 
-// Activation
-register_activation_hook(__FILE__, array($bootstrap, 'activate'));
-
-// Deactivation
-require_once(plugin_dir_path(__FILE__) . '/includes/WPCMDeactivate.php');
-register_deactivation_hook(__FILE__, array('WPCMDeactivate', 'deactivate'));
+*/
