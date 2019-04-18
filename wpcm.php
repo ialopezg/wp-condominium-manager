@@ -38,24 +38,53 @@ defined('ABSPATH') or die("Hey, you can't access this file, you silly human!");
 
 class WPCMPlugin {
     public function __construct() {
-
+        add_action('init', array($this, 'custom_post_type'));
     }
 
-    public function activate() {}
+    public function register() {
+        // Admin scripts and stylesheets
+        add_action('admin_enqueue_scripts', array($this, 'enqueue'));
 
-    public function deactivate() {}
+        // Admin menu
+        add_action('admin_menu', array($this, 'add_admin_pages'));
+    }
 
-    public function uninstall() {}
+    public function add_admin_pages() {
+        add_menu_page('WPCM Plugin', 'WPCMP', 'manage_options', 'wpcm_plugin', array($this, 'admin_index'), 'dashicons-building', 110);
+    }
+
+    public function admin_index() {
+        require_once(plugin_dir_path(__FILE__) . 'templates/admin.php');
+    }
+
+    protected function create_post_type() {
+        add_action('init', array($this, 'custom_post_type'));
+    }
+
+    public function custom_post_type() {
+        register_post_type('books', array('public' => true, 'label' => 'Books'));
+    }
+
+    public function enqueue() {
+        // Enqueue all our scripts
+        wp_enqueue_style('mypluginstyle', plugins_url('/assets/styles.css', __FILE__));
+        wp_enqueue_script('mypluginstyle', plugins_url('/assets/scripts.js', __FILE__));
+    }
+
+    public function activate() {
+        require_once(plugin_dir_path(__FILE__) . 'includes/WPCMActivate.php');
+        WPCMActivate::activate();
+    }
 }
 
 if (class_exists('WPCMPlugin')) {
     $bootstrap = new WPCMPlugin();
+    $bootstrap->register();
 }
 
 // Activation
 register_activation_hook(__FILE__, array($bootstrap, 'activate'));
 
 // Deactivation
-register_deactivation_hook(__FILE__, array($bootstrap, 'deactivate'));
-
-// Uninstall
+require_once(plugin_dir_path(__FILE__) . '/includes/WPCMDeactivate.php');
+register_deactivation_hook(__FILE__, array('WPCMDeactivate', 'deactivate'));
