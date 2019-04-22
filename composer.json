@@ -1,0 +1,19 @@
+{
+    "name": "ialopezg/wpcm",
+    "description": "WordPress Plugin for control of Condominiums, Real States properties (lands, houses, apartments, deposits, parking places and others.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Isidro A. Lopez G.",
+            "email": "isidro.lopezg@live.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "WPCMPlugin\\": "./includes"
+        }
+    }
+}
