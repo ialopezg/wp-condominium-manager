@@ -11,7 +11,7 @@
     <div class="tab-content">
         <div id="tab-1" class="tab-pane active">
             <form method="post" action="options.php">
-                <?php settings_fields('wpcm_options_group'); ?>
+                <?php settings_fields('wpcm_plugin_settings'); ?>
                 <?php do_settings_sections('wpcm_plugin'); ?>
                 <?php submit_button(); ?>
             </form>

@@ -1,0 +1,37 @@
+{
+  "name": "wpcm",
+  "version": "1.0.0",
+  "description": "WordPress Plugin for control of Condominiums, Real States properties (lands, houses, apartments, deposits, parking places and others.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ialopezg/wpcm.git"
+  },
+  "author": "Isidro A. Lopez G.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ialopezg/wpcm/issues"
+  },
+  "homepage": "https://github.com/ialopezg/wpcm#readme",
+  "devDependencies": {
+    "gulp": "^4.0.1",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-cli": "^2.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^4.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2"
+  },
+  "dependencies": {
+    "@babel/core": "^7.4.3",
+    "babel-core": "^6.26.3",
+    "del": "^4.1.0"
+  }
+}
