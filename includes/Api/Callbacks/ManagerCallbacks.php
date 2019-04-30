@@ -10,7 +10,8 @@ use WPCMPlugin\Base\BaseController;
 
 class ManagerCallbacks extends BaseController {
     public function checkBoxSanitize($input) {
-        return filter_var($input, FILTER_SANITIZE_NUMBER_INT);
+        //return filter_var($input, FILTER_SANITIZE_NUMBER_INT);
+        return (isset($input) ? true : false);
     }
 
     public function adminSectionManager() {
@@ -20,8 +21,8 @@ class ManagerCallbacks extends BaseController {
     public function checkBoxField($args) {
         $name = $args['label_for'];
         $classes = $args['class'];
-        $checkbox = get_option($args['label_for']);
+        $checkbox = get_option($name);
 
-        echo '<div class="' . $classes .  '"><input type="checkbox" id="' . $name . '" name="' . $name . '" value="1" class=""' . (isset($checkbox) ? ' checked' : '') . '/><label for="' . $name . '"><div></div></label></div>';
+        echo '<div class="' . $classes .  '"><input type="checkbox" id="' . $name . '" name="' . $name . '" value="1" class=""' . ($checkbox ? ' checked' : '') . '/><label for="' . $name . '"><div></div></label></div>';
     }
 }
