@@ -60,31 +60,3 @@ register_deactivation_hook(__FILE__, 'deactivate_wpcm_plugin');
 if (class_exists('WPCMPlugin\\Init')) {
     WPCMPlugin\Init::register_services();
 }
-
-/*
-use WPCMPlugin\Activate;
-use WPCMPlugin\Deactivate;
-use WPCMPlugin\Pages\Admin;
-
-if (!class_exists('WPCMPlugin')) {
-    class WPCMPlugin {
-
-
-        protected function create_post_type() {
-            add_action('init', array($this, 'custom_post_type'));
-        }
-
-        public function custom_post_type() {
-            register_post_type('books', array('public' => true, 'label' => 'Books'));
-        }
-
-        public function activate() {
-            Activate::activate();
-        }
-    }
-
-    $bootstrap = new WPCMPlugin();
-    $bootstrap->register();
-}
-
-*/

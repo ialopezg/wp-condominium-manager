@@ -78,14 +78,13 @@ class Admin extends BaseController {
     }
 
     public function setSettings() {
-        $args = array();
-        foreach ($this->managers as $key => $value) {
-            $args[] =  array(
+        $args =  array(
+            array(
                 'option_group'  => 'wpcm_plugin_settings',
-                'option_name'   => $key,
-                'callback'      => array($this->callbacks, 'checkBoxSanitize')
-            );
-        }
+                'option_name'   => 'wpcm_plugin',
+                'callback'      => array($this->callbacks_manager, 'checkBoxSanitize')
+            )
+        );
 
         $this->settings->setSettings($args);
     }
@@ -113,6 +112,7 @@ class Admin extends BaseController {
                 'page'      => 'wpcm_plugin',
                 'section'   => 'wpcm_admin_index',
                 'args'      => array(
+                    'option_name' => 'wpcm_plugin',
                     'label_for' => $key,
                     'class'     => 'ui-toggle'
                 )
