@@ -14,9 +14,12 @@ final class Init {
      */
     public static function get_services() {
         return array(
-            Pages\Admin::class,
+            Pages\Dashboard::class,
             Base\Enqueue::class,
-            Base\Links::class
+            Base\Links::class,
+            Base\ApartmentsController::class,
+            Base\RoomsController::class,
+            Base\ParkingsController::class
         );
     }
 

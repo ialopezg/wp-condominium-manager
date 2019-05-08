@@ -12,12 +12,12 @@ use WPCMPlugin\Api\Callbacks\ManagerCallbacks;
 use WPCMPlugin\Api\Settings;
 use WPCMPlugin\Base\BaseController;
 
-class Admin extends BaseController {
+class Dashboard extends BaseController {
     public $callbacks;
     public $callbacks_manager;
     public $pages = array();
     public $settings;
-    public $subPages = array();
+    //public $subPages = array();
 
     public function register() {
         $this->settings = new Settings();
@@ -25,13 +25,13 @@ class Admin extends BaseController {
         $this->callbacks_manager = new ManagerCallbacks();
 
         $this->setPages();
-        $this->setSubPages();
+        //$this->setSubPages();
 
         $this->setSettings();
         $this->setSections();
         $this->setFields();
 
-        $this->settings->addPages($this->pages)->withSubPages('Dashboard')->addSubPages($this->subPages)->register();
+        $this->settings->addPages($this->pages)->withSubPages('Dashboard')->register();
     }
 
     public function setPages() {
