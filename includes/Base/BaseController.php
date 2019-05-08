@@ -25,4 +25,10 @@ class BaseController {
             'chat_manager'=> 'Chat Manager'
         ];
     }
+
+    public function activated($key) {
+        $option = get_option('wpcm_plugin');
+
+        return isset($option[$key]) ? $option[$key] : false;
+    }
 }

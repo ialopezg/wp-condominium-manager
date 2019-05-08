@@ -19,7 +19,13 @@ final class Init {
             Base\Links::class,
             Base\ApartmentsController::class,
             Base\RoomsController::class,
-            Base\ParkingsController::class
+            Base\ParkingsController::class,
+            Base\DepositsController::class,
+            Base\TestimonialsController::class,
+            Base\TemplatesController::class,
+            Base\SecurityController::class,
+            Base\MembershipController::class,
+            Base\ChatController::class
         );
     }
 
