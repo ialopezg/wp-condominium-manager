@@ -9,13 +9,13 @@ namespace WPCMPlugin\Base;
 use WPCMPlugin\Api\Callbacks\AdminCallbacks;
 use WPCMPlugin\Api\Settings;
 
-class RoomsController extends BaseController {
+class SecurityController extends BaseController {
     public $callbacks;
     protected $subPages = array();
 
 
     public function register() {
-        if (!$this->activated('rooms_manager')) {
+        if (!$this->activated('security_manager')) {
             return;
         }
 
@@ -31,11 +31,11 @@ class RoomsController extends BaseController {
         $this->subPages = array(
             array(
                 'parent_slug'   => 'wpcm_plugin',
-                'page_title'    => 'Rooms',
-                'menu_title'    => 'Rooms Manager',
+                'page_title'    => 'Security',
+                'menu_title'    => 'Security Manager',
                 'capability'    => 'manage_options',
-                'menu_slug'     => 'wpcm_rooms',
-                'callback'      => array($this->callbacks, 'adminRooms')
+                'menu_slug'     => 'wpcm_security',
+                'callback'      => array($this->callbacks, 'adminSecurity')
             )
         );
     }

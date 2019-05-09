@@ -15,10 +15,7 @@ class ApartmentsController extends BaseController {
 
 
     public function register() {
-        $option = get_option('wpcm_plugin');
-        $activated = isset($option['apartments_manager']) ? $option['apartments_manager'] : false;
-
-        if (!$activated) {
+        if (!$this->activated('apartments_manager')) {
             return;
         }
 

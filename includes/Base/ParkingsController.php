@@ -15,10 +15,7 @@ class ParkingsController extends BaseController {
 
 
     public function register() {
-        $option = get_option('wpcm_plugin');
-        $activated = isset($option['rooms_manager']) ? $option['rooms_manager'] : false;
-
-        if (!$activated) {
+        if (!$this->activated('parking_manager')) {
             return;
         }
 
@@ -28,31 +25,18 @@ class ParkingsController extends BaseController {
         $this->setSubPages();
 
         $this->settings->addSubPages($this->subPages)->register();
-
-        add_action('init', array($this, 'activate'));
     }
 
     public function setSubPages() {
         $this->subPages = array(
             array(
                 'parent_slug'   => 'wpcm_plugin',
-                'page_title'    => 'Parkings',
-                'menu_title'    => 'Parkings Manager',
+                'page_title'    => 'Parking',
+                'menu_title'    => 'Parking Manager',
                 'capability'    => 'manage_options',
-                'menu_slug'     => 'wpcm_parkings',
-                'callback'      => array($this->callbacks, 'adminParkings')
+                'menu_slug'     => 'wpcm_parking',
+                'callback'      => array($this->callbacks, 'adminParking')
             )
         );
-    }
-
-    public function activate() {
-        register_post_type('wpcm_parkings', array(
-            'labels' => array(
-                'name'          => 'Parkings',
-                'singular_name' => 'Parking'
-            ),
-            'public'            => true,
-            'has_archive'       => true
-        ));
     }
 }
